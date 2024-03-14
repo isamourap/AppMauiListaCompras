@@ -12,7 +12,7 @@
     </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Somar"/>
+        <ToolbarItem Text="Somar" Clicked="ToolbarItem_Clicked_Somar"/>
         <ToolbarItem Text="Adicionar"/>
     </ContentPage.ToolbarItems>
 
