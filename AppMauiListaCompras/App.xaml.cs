@@ -1,4 +1,5 @@
 ﻿using AppMauiListaCompras.Helpers;
+using Windows.UI.WebUI;
 namespace AppMauiListaCompras
 
 {
@@ -23,6 +24,12 @@ namespace AppMauiListaCompras
                 }
                 return _db;
             }
+        }
+
+        public App() 
+        {
+            InitializeComponent();
+            MainPage = new AppShell();
         }
     }
 }
