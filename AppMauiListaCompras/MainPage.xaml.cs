@@ -40,20 +40,19 @@ namespace AppMauiListaCompras
             await Navigation.PushAsync(new Views.NovoProduto());
         }
 
-        private void txt_search_TextChanged(object sender, TextChangedEventArgs e)
+        private async void txt_search_TextChanged(object sender, TextChangedEventArgs e)
         {
             string q = e.NewTextValue;
             Lista_Produtos.Clear();
-            Task.Run(async () =>
+            
+            
+            List<Produto> tmp = await App.Db.Search(q);
+            foreach (Produto p in tmp)
             {
-                List<Produto> tmp = await App.Db.Search(q);
-                foreach (Produto p in tmp)
-                {
-                    Lista_Produtos.Add(p);
-                }
+              Lista_Produtos.Add(p);
+            }
 
 
-            });
         }
 
         private void ref_carregando_Refreshing(object sender, EventArgs e)
@@ -67,7 +66,7 @@ namespace AppMauiListaCompras
                     Lista_Produtos.Add(p);
                 }
             });
-            ref_carregando.IsRefreshing = false;
+            
         }
 
         private void lst_produtos_ItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -96,6 +95,7 @@ namespace AppMauiListaCompras
                 {
                     await App.Db.Delelte(p.Id);
                     await DisplayAlert("Sucesso!", "Produto Removido", "OK");
+                    Lista_Produtos.Remove(p);
                 }
             }
             catch (Exception ex) 
